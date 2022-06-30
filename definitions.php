@@ -16,8 +16,9 @@ const OPERATOR_LESS = '<';
 /** Greater than operator */
 const OPERATOR_GREATER = '>';
 
+/** Max items from the Hashnode API */
 const SETTINGS_MAX_API_ITEMS = 20;
 /** RSS feed time to live */
-const SETTING_CACHE_RSS_TTL = 1;
+const SETTING_CACHE_RSS_TTL = 600;
 /** API call time to live */
-const SETTING_CACHE_API_TTL = 1800;
+const SETTING_CACHE_API_TTL = 600;

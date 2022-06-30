@@ -20,6 +20,7 @@
  */
 
 include_once __DIR__ . '/definitions.php';
+include_once __DIR__ . '/settings.php';
 include_once __DIR__ . '/utils.cache.php';
 include_once __DIR__ . '/utils.normalize.php';
 include_once __DIR__ . '/utils.query.php';
@@ -29,8 +30,10 @@ $isDebug = isset($_GET['debug']);
 unset($_GET['debug']);
 
 // Get blog host from the given URL.
-list($hostname) = array_slice(explode('/', $_SERVER["REQUEST_URI"]), 1);
-$hostname = current(explode('?', $hostname));
+if (empty($hostname)) {
+  list($hostname) = array_slice(explode('/', $_SERVER["REQUEST_URI"]), 1);
+  $hostname = current(explode('?', $hostname));
+}
 
 $rssUrl = "https://$hostname/rss.xml";
 
@@ -105,9 +108,11 @@ if (!$apiResult) {
 $apiJson = json_decode($apiResult);
 
 // Check all the posts, and remove them from the XML if they're not valid.
+$normalizedItems = [];
 foreach ($apiJson->data as $alias => $item) {
   // Normalize the API response data so it's easily matched the filter.
   $normalizedItem = normalizeApiResponseProperties($filters, $item);
+  $normalizedItems[$alias] = $normalizedItem;
 
   // Check each filter on the curren titem.
   foreach ($filters as $property => $filterStrings) {
@@ -127,6 +132,7 @@ if ($isDebug) {
   debug('Graph QL Query', $query);
   debug('RSS Posts (parsed)', $posts);
   debug('Hashnode API Result', $apiJson);
+  debug('Normalized API Result', $normalizedItems);
 
   die();
 }
