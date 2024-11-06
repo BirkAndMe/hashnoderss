@@ -1,0 +1,17 @@
+{
+    "name": "birkandme/hashnoderss",
+    "description": "Generate an RSS feed for a Hashnode blog, filtered by tags",
+    "homepage": "https://github.com/BirkAndMe/hashnoderss",
+    "type": "project",
+    "authors": [
+        {
+            "name": "philip",
+            "email": "philip@birk-jensen.dk"
+        }
+    ],
+    "require": {
+        "mibe/feedwriter": "^1.1",
+        "guzzlehttp/guzzle": "^7.9",
+        "symfony/cache": "^5.4"
+    }
+}
