@@ -14,11 +14,7 @@ require __DIR__ . '/vendor/autoload.php';
 // -----------------------------------------------------------------------------
 
 // Include the settings.
-$settings = __DIR__ . '/settings.php';
-if (!is_readable($settings)) {
-  die('Copy and edit the "example.settings.php" to "settings.php"');
-}
-require $settings;
+require __DIR__ . '/settings.php';
 
 
 // -----------------------------------------------------------------------------
